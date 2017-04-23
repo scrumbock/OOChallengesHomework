@@ -37,13 +37,13 @@ multiplierTool.getCurrentValue();
 
 
 // This is the photo object constructor, taking a filename and location as its arguments
-function Photo(filename, location) {
+function Photo(fileName, location) {
 	this.filename = fileName;
 	this.location = location;
 }
 
 // This is the album object constructor
-function Album() {
+function Album(albumName) {
 	this.albumName = albumName;
 	this.photos = [];
 	this.addPhotos = addPhotos;
@@ -51,7 +51,7 @@ function Album() {
 	this.accessPhoto = accessPhoto;
 }
 
-// // The method to list photos 
+// The method to list photos 
 
 function listPhotos() {
 	for (var i = 0; i < this.photos.length; i++) {
@@ -59,7 +59,7 @@ function listPhotos() {
 	}
 }
 
-// // The method that accesses the photo by the specific order it was added
+// The method that accesses the photo by the specific order it was added
 
 function accessPhoto(orderNumber) {
 	this.photos[orderNumber - 1];
@@ -80,6 +80,8 @@ var swimPhoto = new Photo("lakeswim.jpg", "Round Valley");
 var santaPhoto = new Photo("BeauSanta.jpg", "Triangle Park");
 
 puppyPhotos.addPhotos(santaPhoto);
+puppyPhotos.addPhotos(swimPhoto);
+puppyPhotos.addPhotos(agilityPhoto);
 
 
 //#3.)  Create a prototypical Person object. From this object, extend a Teacher object and a Student object. Each of these objects should have attributes and methods pertinent to what they describe. Also create a School object that should be able to store instances of students and teachers. Make sure to write code afterwards that creates instances of these objects to make sure that what you've written works well and you're able to store the necessary data in each object. Potential methods: A teacher can change the grades of a student, give detention to a student, or send a student to the principal. A student can do her or his homework, skip class, or give the teacher an apple. The school could open or close.
@@ -97,20 +99,20 @@ function Teacher() {
 	this.pHd = true;
 	this.fullTime = "fullTime";
 // this is adding the properties and arguements of the Person object to the Teacher
-	Person.apply(this,arguments);
+	Person.apply(this, arguments);
 //  this is storing the method for teacher being able to change student's grade
 	this.changeGrade = changeGrade;
 	this.closeSchool = closeSchool;
 }
 
-// this is the Student extension, which has no arguments, but starts with a perfect 100 grade score, which is passing
+// this is the Student extension, which has no arguments, but starts with an empty  0 grade score, and is passing until the teacher gives them a score below 80.
 function Student() {
 	this.grade = 0;
 	this.passing = true;
+// this is adding the properties of the Person object and all its arguments to the Student 
+	Person.apply(this, arguments);
 // this is storing the method for the student being able to give the teacher and apple
 	this.giveApple = giveApple;
- // this is adding the properties of the Person object and all its arguments to the Student 
-	Person.apply(this,arguments);
 }
 
 // This is the School object that will store Students and Teachers, it takes a name as an arguement to identify the school
@@ -144,7 +146,6 @@ function changeGrade(student, grade) {
 	else {
 		student.passing = false;
 	}
-
 }
 
 // this is the method for a Student to be able to give a teacher an apple
@@ -163,9 +164,9 @@ var Jim = new Teacher("Jim", "King", 28, "Atlantic City");
 var Pawel = new Teacher("Pawel", "Mucha", 34, "Stalowa Wola");
 
 // instances of Students:
-var Ethan = new Student;
-var Ian = new Student;
-var Josh = new Student;
+var Ethan = new Student("Ethan", "Megill", 28, "Barnegat");
+var Ian = new Student("Ian", "Zolitor", 32, "Jersey Shore");
+var Josh = new Student("Joshua", "Neidich", 34, "Atlanta");
 
 // instance of a new school
 var NYCDA = new School("NYCDA")
